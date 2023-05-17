@@ -1,0 +1,17 @@
+- name: Hashicorp Cluster vault setup playbooks
+  hosts: vault
+  gather_facts: yes
+  vars:
+    vault_tls_disable : false
+    override_certificate: true
+    certificate_root_dir: "{{ inventory_dir+'/host_vars/certificates'}}"
+  roles:
+    - { role: 03-install-vault, tags: ["03-install-vault"]}       
+    - { role: 04-vault-certificates, tags: ["04-vault-certificates"] }
+    - role: 05-configure-vault 
+      tags: 
+        - "05-configure-vault" 
+      vars:
+        force_bootstrap: true
+        log_level : "{{ lookup('env','VAULT_LOG_LEVEL') | default('DEBUG', true) }}"
+    - { role: 06-unseal-vault, tags: ["06-unseal-vault"]}

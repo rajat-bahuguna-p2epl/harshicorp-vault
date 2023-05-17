@@ -1,0 +1,29 @@
+{
+  "cSpell.words": [
+    "ansible",
+    "ansible hostname",
+    "cfssl",
+    "configs",
+    "dpkg",
+    "due",
+    "force",
+    "hashicorp",
+    "hostname",
+    "item",
+    "just",
+    "just force systemd to reread configs due updating item service",
+    "limit",
+    "limit nofile",
+    "limit nproc",
+    "mainpid",
+    "nofile",
+    "nproc",
+    "reread",
+    "service",
+    "sigint",
+    "systemd",
+    "to",
+    "gcloud",
+    "updating"
+  ]
+}
