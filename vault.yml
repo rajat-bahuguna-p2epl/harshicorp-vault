@@ -1,5 +1,5 @@
 - name: Hashicorp Cluster vault setup playbooks
-  hosts: vault
+  hosts: Master
   gather_facts: yes
   vars:
     vault_tls_disable : false

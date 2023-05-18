@@ -48,12 +48,14 @@
         state: directory
         owner: "{{ ansible_user }}"
         mode: '0755'
+      become: yes
     - name: "ensuring files to store encrypted variables are created"
       file:
         path: "{{ play_encrypted_vars_dir }}/{{ item }}.yml"
         owner: "{{ ansible_user }}"
         mode: '0755'
         state: touch
+      become: yes
       loop:
         - vault_unseal_keys_b64
         - vault_root_token
@@ -66,9 +68,11 @@
     - blockinfile:
         path: "{{ play_encrypted_vars_dir }}/vault_root_token.yml"
         block: "{{ encrypted_vault_root_token.stdout_lines | join('\n') }}"
+      become: yes
     - blockinfile:
         path: "{{ play_encrypted_vars_dir }}/vault_unseal_keys_b64.yml"
         block: "{{ encrypted_vault_unseal_keys_b64.stdout_lines | join('\n') }}"
+      become: yes
     delegate_to: localhost
   when:
     - not vault_status.initialized

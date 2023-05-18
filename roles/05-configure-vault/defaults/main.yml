@@ -8,6 +8,6 @@ vault_cluster_port : "{{ lookup('env','VAULT_CLUSTER_PORT') | default('8201', tr
 vault_storage_path : "{{ lookup('env','VAULT_STORAGE_PATH') | default('/opt/vault/data', true) }}"
 vault_tls_path : "{{ lookup('env','VAULT_TLS_PATH') | default('/opt/vault/tls', true) }}"
 vault_config_directory_path : "/etc/vault.d"
-play_encrypted_vars_dir: "{{ inventory_dir+'/host_vars/'}}"
+play_encrypted_vars_dir: "{{ inventory_dir+'/host_vars'}}"
 
 vault_profile_path: "/etc/profile.d/vault.sh"

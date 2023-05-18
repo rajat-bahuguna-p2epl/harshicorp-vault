@@ -28,11 +28,27 @@
       state: absent
     when:
       - server_csr_enc.stat.exists
-  - name: "Generating vault server certificates for '{{ inventory_hostname }}'"
-    shell: "echo '{}' | sudo cfssl gencert -ca={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca.pem -ca-key={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca-key.pem -config={{ cfssl_config_path }} -hostname='server.global.vault,{{ inventory_hostname }},{{ private_ip }},localhost,127.0.0.1' - | cfssljson -bare server"
+
+  - name: run shell script
+    shell: ./permission.sh
+  
+  # - name: "Generating vault server certificates for '{{ inventory_hostname }}'"
+  #   shell: "echo '{}' |sudo cfssl gencert -ca={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca.pem -ca-key={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca-key.pem -config={{ cfssl_config_path }} -hostname='server.global.vault,{{ inventory_hostname }},{{ private_ip }},localhost,127.0.0.1' - | cfssljson -bare server"
+  #   args:
+  #     chdir: "{{ certificate_root_dir }}/vault/{{ inventory_hostname }}"
+
+  - name: Generating vault server certificates for '{{ inventory_hostname }}'
+    shell: sudo sh -c "echo '{}' | cfssl gencert -ca={{ certificate_root_dir }}/ca.pem -ca-key={{ certificate_root_dir }}/ca-key.pem -config={{ cfssl_config_path }} -hostname='server.global.vault,{{ inventory_hostname }},{{ private_ip }},localhost,127.0.0.1' - | cfssljson -bare server"
     args:
       chdir: "{{ certificate_root_dir }}/vault/{{ inventory_hostname }}"
+
   when: >
     ca_pem_enc.stat.exists == False or
     ca_key_pem_enc.stat.exists == False or
     ca_csr_enc.stat.exists == False
+
+
+
+
+
+    

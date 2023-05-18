@@ -10,4 +10,4 @@
   - import_tasks:  "01-join.yml"
   - import_tasks:  "02-unseal.yml"
   - import_tasks:  "03-env-setup.yml"
-  no_log: true
+  no_log: false

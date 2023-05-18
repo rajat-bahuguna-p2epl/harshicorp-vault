@@ -68,6 +68,7 @@
       path : "{{ systemd_unit_directory }}/vault.service"
       block: |
         ExecStartPost=bash -c /opt/vault/init.sh
+    become: yes
   - name: "reloading systemctl"
     command: "systemctl daemon-reload"
   - name: "restarting vault service"

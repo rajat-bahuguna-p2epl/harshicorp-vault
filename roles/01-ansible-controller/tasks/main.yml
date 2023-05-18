@@ -16,7 +16,5 @@
   delegate_to: localhost
   when: ansible_facts['os_family'] == "Debian"
   become: yes
-  become_user: root
-  become_method: sudo
   
   run_once: true

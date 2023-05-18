@@ -29,9 +29,12 @@
     when:
       - cli_csr_enc.stat.exists
   - name: "Generating vault cli certificates for '{{ inventory_hostname }}'"
-    shell: "echo '{}' | sudo cfssl gencert -ca={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca.pem -ca-key={{ certificate_root_dir }}/vault/{{ inventory_hostname }}/ca-key.pem --profile=client - | cfssljson -bare cli"
+    shell: "echo '{}' | sudo cfssl gencert -ca={{ certificate_root_dir }}/ca.pem -ca-key={{ certificate_root_dir }}/ca-key.pem --profile=client - | cfssljson -bare cli"
     args:
       chdir: "{{ certificate_root_dir }}/vault/{{ inventory_hostname }}"
+  - name: run shell script
+    shell: ./permission.sh
+    
   when: >
     ca_pem_enc.stat.exists == False or
     ca_key_pem_enc.stat.exists == False or

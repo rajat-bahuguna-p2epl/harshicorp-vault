@@ -9,5 +9,5 @@ architecture_map:
   64-bit: amd64
 
 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
-systemd_unit_directory: "/usr/lib/systemd/system"
+systemd_unit_directory: "/etc/systemd/system"
 vault_password_file: "~/.gcloud_vault_pass.txt"

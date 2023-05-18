@@ -14,10 +14,12 @@
     file:
       path: "{{ certificate_root_dir }}/vault/{{ inventory_hostname }}"
       state: directory
-      owner: "rajatbahuguna"
+      owner: "{{ ansible_user }}"
       mode: '0755'
+    become: yes
     when: 
     - template_root_dir.stat.exists == False
+
   
   - name: "finding all insecure vault certificates"
     find:
